@@ -1,0 +1,79 @@
+package Giris;
+import java.util.Scanner;
+public class ATM_Programi {
+    public static void main(String[] args) {
+
+        String realusername, realpass,username,pass;
+        int right=5,select,price;
+        double balance = 1500;
+        Scanner input = new Scanner(System.in);
+
+        System.out.print(" Lütfen kullanıcı adınızı belirleyiniz : ");
+        realusername = input.nextLine();
+
+        System.out.print(" Lütfen şifrenizi belirleyiniz : ");
+        realpass = input.nextLine();
+
+        do {
+            System.out.print(" Lütfen kullanıcı adınızı giriniz : ");
+            username = input.nextLine();
+
+            System.out.print(" Lütfen şifrenizi giriniz : ");
+            pass = input.nextLine();
+            if (!realpass.equals(pass) || !realusername.equals(username)){
+                right = right-1;
+
+
+                if(right > 0){
+                    System.out.println(" Hatalı giriş yaptınız. Tekrar deneyiniz ");
+                    System.out.println(" Kalan Hakkınız " + right);
+                }
+                if (right == 0 ){
+                    System.out.println(" Hesabınız bloke olmuştur. Lütfen banka ile iletişime geçiniz.");
+                    break;
+                }
+
+            }else {
+                do {
+                    System.out.println(" Hoş geldiniz. Lütfen yapmak istediğiniz işlemi seçiniz");
+                    System.out.println( "1- Para Yatırma \n" +
+                            "2- Para Çekme \n" +
+                            "3- Bakiye sorgulama \n"+
+                            "4- Çıkış yap");
+                    System.out.print(" Yapmak istediğiniz işlem : ");
+                            select = input.nextInt();
+                            switch (select){
+                                case 1:
+                                    System.out.print("Yatıracağınız miktarı yazınız : ");
+                                    price = input.nextInt();
+                                    balance = balance + price;
+                                    System.out.println("Yatırma işlemi sonrası bakiyeniz = " + balance);
+                                    break;
+                                case 2:
+                                    System.out.print("Çekeceğiniz para miktarını yazınız : ");
+                                    price = input.nextInt();
+                                    if (price > balance){
+                                        System.out.print("Bakiye yetersiz!");
+                                    }else{
+                                        balance = balance - price;
+                                        System.out.println("Çekme işlemi sonrası bakiyeniz = " + balance);
+                                    }
+                                    break;
+                                case 3:
+                                    System.out.println("Bakiyeniz = " + balance);
+                                    break;
+                                case 4:
+                                    System.out.print("Çıkış işleminiz gerçekleşmiştir. İyi günler dileriz.");
+                                    break;
+                            }
+
+                }while(select!=4);
+
+                break;
+            }
+
+        }while (!realpass.equals(pass) || !realusername.equals(username));
+
+
+    }
+}
